@@ -1,0 +1,31 @@
+<!-- <%- include('partials/header') %> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscriber List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body> -->
+    <div class="container">
+        <h1>Subscriber List</h1>
+        <table id="subscriberTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% subscribers.forEach(subscriber => { %>
+                    <tr>
+                        <td><%= subscriber.subscriber_id %></td>
+                        <td><%= subscriber.emailid %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<!-- </body>
+</html> -->

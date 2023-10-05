@@ -1,0 +1,22 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to Our Newsletter</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body> -->
+    <%- include('partials/header') %>
+    <div class="container">
+        <h1>Subscribe to Our Newsletter</h1>
+        <form action="/subscribe" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <% if (message) { %>
+            <p class="<%= messageClass %>"><%= message %></p>
+        <% } %>
+    </div>
+<!-- </body>
+</html> -->

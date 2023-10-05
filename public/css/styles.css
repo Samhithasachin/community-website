@@ -1,5 +1,5 @@
 
-body {
+/* body {
   background-color: #E8ECEF;
 }
 
@@ -12,5 +12,202 @@ body {
   text-align: center;
   font-size: 2rem;
   color: #fff;
-  background-color: #000;
+  background-color: #000; 
+
+
+}*/
+/* new */
+/* body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 24px;
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#successMessage {
+  color: #009900;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+} */
+
+body {
+  margin: 0;
+  padding: 0%;
+}
+.top_bar {
+  background-color: rgba(102, 49, 48, 1);
+}
+.top_bar_row {
+  padding: 15px;
+  color: white;
+}
+#VisitPhytoCommunity {
+  text-align: right;
+}
+.bocp {
+  text-align: center;
+  padding: 15px;
+  font-family: Playfair Display;
+  font-style: normal;
+  font-size: 30px;
+}
+span {
+  font-weight: 800;
+}
+.main-img {
+  max-width: 100%;
+}
+.blurredbody {
+  text-align: center;
+  margin:2rem 25rem ;
+
+  overflow: visible;
+
+  background-color: rgba(211, 211, 211, 0.09);
+  backdrop-filter: blur(20px);
+  /* border-radius: 10px; */
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: rgba(207, 207, 207, 1);
+  color: white;
+}
+
+.blurredbody p {
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 1);
+}
+.main_body {
+  background-image: url("/images/Mask_Group_187.png");
+  padding: 50px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  text-align: center;
+}
+a {
+  color: black;
+}
+.naviBar {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 1);
+}
+.formClass {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.blurredbody2 {
+  text-align: center;
+
+  padding-top: 14px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: visible;
+
+  background-color: rgba(211, 211, 211, 0.09);
+  backdrop-filter: blur(20px);
+
+
+  color: white;
+}
+
+.submit_button{
+  background-color:  rgba(102, 49, 48, 1);
+  padding-left: 80px;
+  padding-right: 80px;
+  border-color: white;
+}
+
+.calendar{
+  background-color: white;
+}
+.logo{
+  width: 120px;
+  height: 100px;
+  margin-top: -30px;
 }

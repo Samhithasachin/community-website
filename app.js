@@ -1,174 +1,232 @@
-//jshint esversion:6
-require('dotenv').config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const ejs = require("ejs");
-const mongoose = require("mongoose");
-const session = require('express-session');
-const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const findOrCreate = require('mongoose-findorcreate');
+
+// const express = require('express');
+// const mysql = require('mysql');
+// const bodyParser = require('body-parser');
+// const ejs = require('ejs');
+
+// const app = express();
+// const port = 3000;
+
+// // Create a MySQL database connection
+// const db = mysql.createConnection({
+//   host: '162.241.252.224',
+//   user: 'mijohhmy',
+//   password: 'Pass,1234',
+//   database: 'mijohhmy_phytolabcommunity'
+// });
+
+
+// // Connect to the database
+// db.connect((err) => {
+//     if (err) {
+//         console.error('Error connecting to MySQL:', err);
+//     } else {
+//         console.log('Connected to MySQL database');
+//     }
+// });
+
+// // Middleware for parsing JSON data
+// app.use(bodyParser.json());
+
+// // Set the view engine to EJS
+// app.set('view engine', 'ejs');
+
+// // Serve static files (CSS, JavaScript)
+// app.use(express.static('public'));
+
+// // Handle GET request to render the subscriber list page
+// app.get('/subscriber-list', (req, res) => {
+//     // Query the database to retrieve subscriber data
+//     const sql = 'SELECT * FROM newsletter_subscriber';
+//     db.query(sql, (err, results) => {
+//         if (err) {
+//             console.error('Error fetching subscribers:', err);
+//             return res.status(500).json({ error: 'Error fetching subscribers' });
+//         }
+
+//         // Render the subscriber-list.ejs template with the retrieved data
+//         res.render('subscriber-list', { subscribers: results });
+//     });
+// });
+
+
+// // ...
+
+// // Handle GET request to render the subscription form
+// app.get('/subscribe', (req, res) => {
+//   res.render('subscribe', { message: null, messageClass: '' });
+// });
+// // Handle POST request to add an email to the database and display a message
+// app.post('/subscribe', (req, res) => {
+//   const { email } = req.body;
+
+//   // Check if the email is valid (you can add more validation here)
+//   if (!isValidEmail(email)) {
+//       return res.render('subscribe', {
+//           message: 'Invalid email address',
+//           messageClass: 'error',
+//       });
+//   }
+
+//   // Insert the email into the database
+//   const sql = 'INSERT INTO newsletter_subscriber (emailid) VALUES (?)';
+//   db.query(sql, [email], (err, result) => {
+//       if (err) {
+//           console.error('Error inserting email:', err);
+//           return res.render('subscribe', {
+//               message: 'Subscription failed. Please try again later.',
+//               messageClass: 'error',
+//           });
+//       }
+      
+//       console.log('Email inserted into the database');
+      
+//       // Display a success message
+//       res.render('subscribe', {
+//           message: 'Thank you for subscribing!',
+//           messageClass: 'success',
+//       });
+//   });
+// });
+
+
+// // Start the server
+// app.listen(port, () => {
+//     console.log(`Server is running on port ${port}`);
+// });
+
+// // Function to validate an email address (you can use a library like validator.js)
+// function isValidEmail(email) {
+//     // Simple email validation, you can implement more robust validation
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return emailRegex.test(email);
+// }
+
+
+
+const express = require('express');
+const mysql = require('mysql');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
 const app = express();
+const port = 3000;
+// app.use(express.bodyParser());
+// Create a MySQL database connection
+const db = mysql.createConnection({
+  host: '162.241.252.224',
+  user: 'mijohhmy',
+  password: 'Pass,1234',
+  database: 'mijohhmy_phytolabcommunity'
+});
 
-app.use(express.static("public"));
+// Connect to the database
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL:', err);
+    } else {
+        console.log('Connected to MySQL database');
+    }
+});
+
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+// Middleware for parsing JSON data
+app.use(bodyParser.json());
+
+
+// Set the view engine to EJS
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
-app.use(session({
-  secret: "Our little secret.",
-  resave: false,
-  saveUninitialized: false
-}));
+// Serve static files (CSS, JavaScript)
+app.use(express.static('public'));
+// app.use('/public/images/', express.static('./public/images'));
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true});
-mongoose.set("useCreateIndex", true);
-
-const userSchema = new mongoose.Schema ({
-  email: String,
-  password: String,
-  googleId: String,
-  secret: String
+// Handle GET request to render the subscription form
+app.get('/subscribe', (req, res) => {
+    res.render('subscribe', { message: null, messageClass: '' });
 });
 
-userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate);
-
-const User = new mongoose.model("User", userSchema);
-
-passport.use(User.createStrategy());
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
-
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
-
-app.get("/", function(req, res){
-  res.render("home");
-});
-
-app.get("/auth/google",
-  passport.authenticate('google', { scope: ["profile"] })
-);
-
-app.get("/auth/google/secrets",
-  passport.authenticate('google', { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect to secrets.
-    res.redirect("/secrets");
-  });
-
-app.get("/login", function(req, res){
-  res.render("login");
-});
-
-app.get("/register", function(req, res){
-  res.render("register");
-});
-
-app.get("/secrets", function(req, res){
-  User.find({"secret": {$ne: null}}, function(err, foundUsers){
-    if (err){
-      console.log(err);
-    } else {
-      if (foundUsers) {
-        res.render("secrets", {usersWithSecrets: foundUsers});
-      }
-    }
-  });
-});
-
-app.get("/submit", function(req, res){
-  if (req.isAuthenticated()){
-    res.render("submit");
-  } else {
-    res.redirect("/login");
-  }
-});
-
-app.post("/submit", function(req, res){
-  const submittedSecret = req.body.secret;
-
-//Once the user is authenticated and their session gets saved, their user details are saved to req.user.
-  // console.log(req.user.id);
-
-  User.findById(req.user.id, function(err, foundUser){
-    if (err) {
-      console.log(err);
-    } else {
-      if (foundUser) {
-        foundUser.secret = submittedSecret;
-        foundUser.save(function(){
-          res.redirect("/secrets");
+// Handle POST request to add an email to the database and display a message
+app.post('/subscribe', (req, res) => {
+    const { email } = req.body;
+    console.log(req.body);
+    // Check if the email is valid (you can add more validation here)
+    if (!isValidEmail(email)) {
+        return res.render('subscribe', {
+            message: 'Invalid email address',
+            messageClass: 'error',
         });
-      }
     }
-  });
+
+    // Insert the email into the database
+    const sql = 'INSERT INTO newsletter_subscriber (emailid) VALUES (?)';
+    db.query(sql, [email], (err, result) => {
+        if (err) {
+            console.error('Error inserting email:', err);
+            return res.render('subscribe', {
+                message: 'Subscription failed. Please try again later.',
+                messageClass: 'error',
+            });
+        }
+
+        console.log('Email inserted into the database');
+
+        // Display a success message
+        res.render('subscribe', {
+            message: 'Thank you for subscribing!',
+            messageClass: 'success',
+        });
+    });
 });
 
-app.get("/logout", function(req, res){
-  req.logout();
-  res.redirect("/");
+// Handle GET request to render the subscriber list page
+app.get('/subscriber-list', (req, res) => {
+    // Query the database to retrieve subscriber data
+    const sql = 'SELECT * FROM newsletter_subscriber';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching subscribers:', err);
+            return res.status(500).json({ error: 'Error fetching subscribers' });
+        }
+
+        // Render the subscriber-list.ejs template with the retrieved data
+        res.render('subscriber-list', { subscribers: results });
+    });
 });
 
-app.post("/register", function(req, res){
-
-  User.register({username: req.body.username}, req.body.password, function(err, user){
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/secrets");
-      });
-    }
-  });
-
+//create event free get method
+app.get('/create-event-free', (req, res) => {
+  res.render('createEvent', { message: null, messageClass: '' });
 });
 
-app.post("/login", function(req, res){
+// Handle POST request to add an event form data to the database and display a message
+app.post('/create-event-free', (req, res) => {
+    const { name } = req.body;
+    console.log(req.body);
+    
 
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
+    // Insert the email into the database
+    const sql = 'INSERT INTO create_event_free (event_name) VALUES (?)';
+    db.query(sql, [name], (err, result) => {
+        if (err) {
+            console.error('Error inserting event:', err);
+            return res.render('subscribe', {
+                message: 'Subscription failed. Please try again later.',
+                messageClass: 'error',
+            });
+        }
 
-  req.login(user, function(err){
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/secrets");
-      });
-    }
-  });
+        console.log('Event inserted into the database');
 
+        // Display a success message
+        res.render('subscribe', {
+            message: 'Thank you for subscribing!',
+            messageClass: 'success',
+        });
+    });
 });
 
 
@@ -177,6 +235,19 @@ app.post("/login", function(req, res){
 
 
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000.");
+
+
+
+
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
+
+// Function to validate an email address (you can use a library like validator.js)
+function isValidEmail(email) {
+    // Simple email validation, you can implement more robust validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
