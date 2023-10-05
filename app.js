@@ -204,13 +204,13 @@ app.get('/create-event-free', (req, res) => {
 
 // Handle POST request to add an event form data to the database and display a message
 app.post('/create-event-free', (req, res) => {
-    const { name } = req.body;
+    const { eventName, eventDate,eventStreet,  eventCity, eventZipcode,eventState, eventCountry, eventSchedule } = req.body;
     console.log(req.body);
     
 
-    // Insert the email into the database
-    const sql = 'INSERT INTO create_event_free (event_name) VALUES (?)';
-    db.query(sql, [name], (err, result) => {
+    // Insert the event details into the database
+    const sql = 'INSERT INTO create_event_free (event_name,event_date,street, city,zip, state, country, event_schedule ) VALUES (?,?,?,?,?,?,?,?)';
+    db.query(sql, [eventName,eventDate,eventStreet,  eventCity, eventZipcode,eventState, eventCountry, eventSchedule], (err, result) => {
         if (err) {
             console.error('Error inserting event:', err);
             return res.render('subscribe', {

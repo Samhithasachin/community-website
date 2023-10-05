@@ -1,149 +1,38 @@
 <%- include('partials/header') %>
 
-    <!--brown bar-->
-<div class="container-fluid top_bar">
-    <div class="row top_bar_row">
-        <div class="col-sm" id="JoinPhytoCommunity">
-            JoinPhytoCommunity
-        </div>
-        <div class="col-sm" id="VisitPhytoCommunity">
-            VisitPhytoCommunity
-        </div>
-      </div>
-    
-</div>
-<!--nav bar-->
-<div class="container-fluid naviBar">
-  <div class="row justify-content-around">
-    <div class="col-md-auto">
-      <a class="nav-item nav-link" href="#">
-        <!-- <i class="fa fa-bars" aria-hidden="true"></i> -->
-        <img src="/images/Component 10 – 1.png"/>
-    </a>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item dropdown">
-        <a class="nav-link " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Events
-          <img src="/images/Component2_1.png">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item dropdown">
-        <a class="nav-link " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manufacturers
-          <img src="/images/Component2_1.png">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item dropdown">
-        <a class="nav-link " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Products
-          <img src="/images/Component2_1.png">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <img src="/images/Component 8 – 1.png" class="logo"/>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item">
-        <a class="nav-link" href="#">Jobs</a>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item">
-        <a class="nav-link" href="#">Help</a>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item dropdown">
-        <a class="nav-link " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          LogIn/Register
-          <img src="/images/Component2_1.png">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-auto">
-      <div class="nav-item">
-        <a class="nav-link" href="#"><img src="/images/search.png"/></a>
-      </div>
-      
-    </div>
-  </div>
-</div>
-  
-  <!-- BOCP -->
-  <div class="bocp">
-    <p><span>B</span>usiness <span>O</span>f <span>C</span>onsumer <span>P</span>roducts</p>
-  </div>
-  <!-- main body -->
-  <div class="main_body">
-    
+ 
     <div class="blurredbody">
         
         <div class="col-md-10 offset-md-1 formClass">
         <form action="/create-event-free" method="post" enctype="application/x-www-form-urlencoded">
             <div class="form-group text-left" >
               <label for="eventName">Event Name</label>
-              <input type="text" class="form-control rounded-0" id="eventName" name="name">
+              <input type="text" class="form-control rounded-0" id="eventName" name="eventName">
             </div>
             <div class="form-group text-left">
               <label for="eventDate">Event Date</label>
-              <input type="date" class="form-control rounded-0" id="eventDate">
+              <input type="date" class="form-control rounded-0" id="eventDate" name="eventDate">
             </div>
             <div class="blurredbody2">
                 <div class="form-group text-left" >
                     <label for="eventSchedule">Event Address <img src="public/images/location.png" /></label>
-                    <input type="text" class="form-control rounded-0" id="eventSchedule" placeholder="Street Address" >
+                    <input type="text" class="form-control rounded-0" id="eventStreet" placeholder="Street Address" name="eventStreet" >
                   </div>
                   
                   <div class="row form-group">
                     <div class="col">
-                      <input type="text" class="form-control rounded-0" placeholder="City">
+                      <input type="text" class="form-control rounded-0" placeholder="City" name="eventCity">
                     </div>
                     <div class="col">
-                      <input type="text" class="form-control rounded-0" placeholder="Zip Code">
+                      <input type="text" class="form-control rounded-0" placeholder="Zip Code" name="eventZipcode">
                     </div>
                   </div>
                   <div class="row form-group">
                     <div class="col">
-                      <input type="text" class="form-control rounded-0" placeholder="State">
+                      <input type="text" class="form-control rounded-0" placeholder="State" name="eventState">
                     </div>
                     <div class="col">
-                      <input type="text" class="form-control rounded-0" placeholder="Country">
+                      <input type="text" class="form-control rounded-0" placeholder="Country" name="eventCountry">
                     </div>
                   </div>
             </div>
@@ -154,7 +43,7 @@
               <label for="eventSchedule">Event Schedule</label>
               <div class="input-group mb-3 text-left cal-grp">
                 
-                <input type="date" class="form-control rounded-0" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="date" class="form-control rounded-0" aria-label="Recipient's username" aria-describedby="basic-addon2" name="eventSchedule">
                 <div class="input-group-append">
                   <span class="input-group-text rounded-0 calendar" id="basic-addon2">
                     <img class="calendar-img" src="/images/calendar.png"/>
