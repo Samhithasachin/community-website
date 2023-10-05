@@ -202,7 +202,7 @@ app.get('/create-event-free', (req, res) => {
   res.render('createEvent', { message: null, messageClass: '' });
 });
 
-// Handle POST request to add an event form data to the database and display a message
+// Handle POST request to add an event form data to the database and display a message -- free
 app.post('/create-event-free', (req, res) => {
     const { eventName, eventDate,eventStreet,  eventCity, eventZipcode,eventState, eventCountry, eventSchedule } = req.body;
     console.log(req.body);
@@ -229,7 +229,11 @@ app.post('/create-event-free', (req, res) => {
     });
 });
 
-
+//create event premium get method
+app.get('/create-event-premium', (req, res) => {
+    res.render('createEventPremium', { message: null, messageClass: '' });
+  });
+  
 
 
 

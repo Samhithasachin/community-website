@@ -138,12 +138,9 @@ span {
 .blurredbody {
   text-align: center;
   margin:2rem 25rem ;
-
   overflow: visible;
-
   background-color: rgba(211, 211, 211, 0.09);
   backdrop-filter: blur(20px);
-  /* border-radius: 10px; */
   border-width: 1.5px;
   border-style: solid;
   border-color: rgba(207, 207, 207, 1);
@@ -210,4 +207,35 @@ a {
   width: 120px;
   height: 100px;
   margin-top: -30px;
+}
+.submit_button2{
+  background-color:  rgba(102, 49, 48, 1);
+  padding-left: 80px;
+  padding-right: 80px;
+  border-color: white;
+  margin-top: 22px;
+}
+.blurredbody3 {
+  padding: 9px 10px;
+  overflow: visible;
+  background-color: rgba(211, 211, 211, 0.09);
+  backdrop-filter: blur(20px);
+  color: white;
+}
+
+.blurredbody4 {
+  text-align: center;
+  margin:2rem 2rem ;
+  overflow: visible;
+  background-color: rgba(211, 211, 211, 0.09);
+  backdrop-filter: blur(20px);
+  color: black;
+}
+
+.blurredbody4 p {
+  font-family: "League Spartan", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 1);
 }
